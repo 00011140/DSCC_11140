@@ -1,16 +1,8 @@
-"""
-WSGI config for config project.
+from django.contrib import admin
+from django.urls import path, include
 
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
-"""
-
-import os
-
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
-
-application = get_wsgi_application()
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('tasks.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+]
