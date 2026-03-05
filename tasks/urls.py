@@ -9,6 +9,8 @@ urlpatterns = [
     path("accounts/login/", LoginView.as_view(template_name="registration/login.html", authentication_form=LoginForm), name="login"),
     path('create/', views.create_task, name='create_task'),
     path('<int:pk>/', views.task_detail, name='task_detail'),
+    path('<int:pk>/edit/', views.edit_task, name='edit_task'),
+    path('<int:pk>/delete/', views.delete_task, name='delete_task'),
     # path('task/<int:pk>/', views.TaskDetailView.as_view(), name='task-detail'),
     # path('task/<int:pk>/update/', views.TaskUpdateView.as_view(), name='task-update'),
     # path('task/<int:pk>/delete/', views.TaskDeleteView.as_view(), name='task-delete'),

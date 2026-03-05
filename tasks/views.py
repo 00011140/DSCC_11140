@@ -1,6 +1,3 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
 from .models import Task
 from .forms import TaskForm
 from django.shortcuts import render, redirect, get_object_or_404
@@ -48,3 +45,22 @@ def register(request):
     return render(request, "registration/register.html", {"form": form})
 
 
+@login_required
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk, user=request.user)
+    if request.method == "POST":
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'tasks/edit_task.html', {'form': form})
+
+@login_required
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk, user=request.user)
+    if request.method == "POST":
+        task.delete()
+        return redirect('home')
+    return render(request, 'tasks/delete_task.html', {'task': task})
