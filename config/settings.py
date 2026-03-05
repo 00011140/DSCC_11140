@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-q9k&7bhqpl@mr7vlapvvar%k(g#v!=_969u2$r#nng@=x$jz(i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['dscc.opketme.uz', 'www.dscc.opketme.uz']
+ALLOWED_HOSTS = ['dscc.opketme.uz', 'www.dscc.opketme.uz', '157.180.85.173']
 
 LOGOUT_REDIRECT_URL = "home"
 
