@@ -83,8 +83,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DEBUG = int(os.environ.get("DEBUG", default=0))
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(" ")
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
