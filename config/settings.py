@@ -26,6 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-q9k&7bhqpl@mr7vlapvvar%k(g#v!=_969u2$r#nng@=x$jz(i'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
