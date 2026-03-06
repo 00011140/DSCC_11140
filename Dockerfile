@@ -2,15 +2,24 @@
 FROM python:3.11-slim AS builder
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --user -r requirements.txt
+
+# Install dependencies globally (avoid ~/.local)
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
 # Stage 2 - runtime
 FROM python:3.11-slim
-RUN useradd -m appuser
 WORKDIR /app
-COPY --from=builder /root/.local /root/.local
+
+# Copy installed packages from builder
+COPY --from=builder /usr/local /usr/local
 COPY . .
-ENV PATH=/root/.local/bin:$PATH
-RUN chown -R appuser:appuser /app
+
+# Create non-root user
+RUN useradd -m appuser \
+    && chown -R appuser:appuser /app
+
 USER appuser
+
+# Gunicorn command
 CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "120"]
